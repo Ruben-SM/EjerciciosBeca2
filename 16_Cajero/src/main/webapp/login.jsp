@@ -9,10 +9,11 @@
         fieldset{
 		    margin-right: 40%;
 		    margin-left: 40%;
+		    background-color: rgb(209, 245, 245);
 		}
-		h1{
-			text-align: center;
-		}
+		h1{ text-align: center; }
+		body {background-color:aliceblue; }
+		
     </style>
 </head>
 <body>

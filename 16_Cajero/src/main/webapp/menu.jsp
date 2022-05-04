@@ -9,9 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   
-<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
+<style>body{background-color:#f0f8ff}</style><link rel="stylesheet" href="styles.70d3d39b876c9e66.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.70d3d39b876c9e66.css"></noscript></head>
 <body>
   <app-root></app-root>
-<script src="runtime.78f538329665fd32.js" type="module"></script><script src="polyfills.808bd3d3bad6ce2a.js" type="module"></script><script src="main.ae5755ecad8cf80b.js" type="module"></script>
+<script src="runtime.78f538329665fd32.js" type="module"></script><script src="polyfills.808bd3d3bad6ce2a.js" type="module"></script><script src="main.ac2549a1ab8dbacc.js" type="module"></script>
 
 </body></html>
