@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,9 +42,21 @@ public class ReservasServiceImpl implements ReservasService {
 
 		
 		if (!vuelo.isEmpty() && hotel.getDisponible()==1){
-			reservasDao.save(reserva);
-			template.put(urlVuelos+"vuelo/"+reserva.getVuelo()+"/"+personas,Vuelo.class);
-			return true;
+			//template.put(urlVuelos+"vuelo/"+reserva.getVuelo()+"/"+personas,Vuelo.class);
+			ResponseEntity<String> response = template.exchange(urlVuelos+"vuelo/{idVuelo}/{plazas}",
+					HttpMethod.PUT,
+					null,	// new HttpEntity(dato_cuerpo)
+					String.class,
+					reserva.getVuelo(),personas);
+ 			
+			// solo guardamos la reserva si se ha actualizado el numero de plazas de los vuelos
+			String cuerpo = response.getBody();
+ 			
+ 			if (cuerpo.equals("true")) {
+ 				reservasDao.save(reserva);
+ 				return true;
+ 			}
+			
 		}
 		return false;
 		
