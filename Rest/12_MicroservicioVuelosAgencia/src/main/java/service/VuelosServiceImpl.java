@@ -35,9 +35,11 @@ public class VuelosServiceImpl implements VuelosService {
 		if (!vuelo.isEmpty()) {
 			Vuelo v = vuelo.get(); 
 			int nPlazas = v.getPlazas();
-			v.setPlazas(nPlazas-plazasReservadas);
-			vuelosDao.save(v);
-			return true;
+			if (nPlazas >= plazasReservadas) {
+				v.setPlazas(nPlazas-plazasReservadas);
+				vuelosDao.save(v);
+				return true;
+			}
 		}
 		
 		return false;

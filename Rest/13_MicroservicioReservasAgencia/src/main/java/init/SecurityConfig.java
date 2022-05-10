@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 		.authorizeRequests()
-		.antMatchers(HttpMethod.GET,"/reservas").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET,"reservas").hasRole("ADMIN")
 		.and()
 		.httpBasic();
 	}
