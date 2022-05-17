@@ -1,0 +1,9 @@
+FROM openjdk
+ADD pedidos.jar servicios/pedidos.jar
+ENV hostconfig=192.168.1.41
+ENV hostdb=192.168.1.41
+ENV hostreal=192.168.1.41
+ENV hosteureka=192.168.1.41
+ENV portdb=3306
+ENV porteureka=8761
+ENTRYPOINT java -jar servicios/pedidos.jar

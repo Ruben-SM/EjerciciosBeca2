@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+
+<script type="text/javascript">
+	var precio = ""
+	
+	function cargarPedidos(){
+		var url="http://localhost:10000/sproductos/productos";
+		
+		$.get(url,function(data,status){			
+			var res="";
+			for(var p of data){
+				res+="<option value='"+p.codigoProducto+"'>"+p.producto+" - "+ p.precioUnitario+ " - "+ p.stock+"</option>";
+			}
+			
+			$("#producto").html(res);
+			
+		});
+	}
+	
+	function cargarDatos(){
+		var val1 = $("#producto").val(); 
+		var val2 = $("#unidades").val();
+		
+		$("#idProducto").val(val1);
+		$("#nUnidades").val(val2);
+		
+		
+		var url = "http://localhost:10000/sproductos/producto/"+$("#producto").val();
+
+		$.get(url, function(data){
+			precio = data;
+		});
+	}
+
+	function pedir(){	
+		var url="http://localhost:10000/spedidos/pedido";
+		
+		var datos=new Object();
+
+		datos.codigoProducto = $("#producto").val(); 
+		datos.unidades = $("#unidades").val();
+		datos.total = precio * $("#unidades").val();
+		datos.fechaPedido = new Date();
+		
+		$.ajax({method:"POST",
+			    url: url,
+			    data: JSON.stringify(datos),
+			    contentType: "application/json"});
+		
+	}
+	
+
+</script>
+
+
+</head>
+<body onload="cargarPedidos()">
+	<div class="container">
+	
+	<h1>Pedido</h1>
+	<div class="row">
+		
+		<div class="col-sm-6" style="border:solid 1px">
+		<br/>
+		<div class="form-group">
+		<label>Unidades</label>
+		<input type="number" min="0" id="unidades" class="form-control" style="width:80%" />
+		</div>
+		
+		<div class="form-group">
+		<label>Producto</label>
+		<select  id="producto"  class="form-control" style="width:80%" onblur="cargarDatos();" ></select>
+		</div>
+
+		<div class="form-group">
+		<h1>Datos del pedido</h1>
+		<label>Producto</label>
+		<input type="text" min="0" id="idProducto" class="form-control" style="width:80%" readonly />
+		</div>
+		<div class="form-group">
+		<label>Unidades</label>
+		<input type="text" min="0" id="nUnidades" class="form-control" style="width:80%" readonly />
+		</div>
+		<br/>
+		<br/>
+		</div>
+		
+	</div>
+		<br/>
+		
+		 <button onclick="pedir()">Confirmar Pedido</button>
+		 <br/><br/><br/>
+		 <a href="pedidos.html">Ver pedidos</a>
+	
+	</div>
+	
+	
+	
+</body>
+</html>
